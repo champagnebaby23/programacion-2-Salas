@@ -82,8 +82,6 @@ void mostrarDetallesPokemon(const Pokemon &p) {
     cout << "HP: " << p.hp << " | Ataque: " << p.ataque << " | Defensa: " << p.defensa << endl;
     cout << "Ataque especial.: " << p.ataqueEsp << " | Defensa Esp.: " << p.defensaEsp << endl;
     cout << "Velocidad: " << p.velocidad << " | Generación: " << p.generacion << endl;
-    cout << "Legendario: " << p.legendario << endl;
-    cout << "----------------------------------------" << endl;
 }
 
 void buscarPorNum(const vector<Pokemon> &pokemones) {
