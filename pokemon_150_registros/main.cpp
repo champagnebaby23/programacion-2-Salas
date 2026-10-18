@@ -76,14 +76,38 @@ void mostrarDetallesPokemon(const Pokemon &p) {
     } else {
         cout << "Este pokemon no es legendario" << endl;
     }
-};
+}
 
 void buscarPorNum (const vector<Pokemon> &pokemones, int num) {
+    short int num;
+    cout << "Ingrese el numero de Pokedex del pokemon que desea buscar: ";
+    cin >> num;
+    if (num < 1 || num > 150) {
+        cout << "El numero de Pokedex debe estar entre 1 y 150" << endl;
+    }
+    bool encontrado = false;
     for (const auto &p : pokemones) {
         if (p.id == num) {
             mostrarDetallesPokemon(p);
-            return;
+            encontrado = true;
+            break;
         }
     }
-    cout << "No se encontro un pokemon" << endl;
-};
+}
+
+void buscarPorNombre (const vector<Pokemon> &pokemones, const string &nombre) {
+    string nombreBuscado;
+    cout << "Ingrese el nombre del pokemon que desea buscar: ";
+    cin >> nombreBuscado;
+    bool encontrado = false;
+    for (const auto &p : pokemones) {
+        if (p.nombre == nombreBuscado) {
+            mostrarDetallesPokemon(p);
+            encontrado = true;
+            break;
+        } else {
+            cout << "No se encontro el pokemon" << endl;
+        }
+}
+
+
