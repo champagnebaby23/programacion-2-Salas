@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// Estructura del Pokemon
 struct Pokemon {
     int id;
     string nombre;
@@ -24,6 +25,7 @@ struct Pokemon {
     string legendario;
 };
 
+// Funcion para limpiar espacios en linea
 string trim(const string& str) {
     size_t first = str.find_first_not_of(" \t\r\n");
     if (string::npos == first) return "";
@@ -31,6 +33,7 @@ string trim(const string& str) {
     return str.substr(first, (last - first + 1));
 }
 
+// Funcion para cargar los datos del CSV
 bool cargarDatos(const string &nombreArchivo, vector<Pokemon> &pokemones) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
@@ -75,6 +78,7 @@ bool cargarDatos(const string &nombreArchivo, vector<Pokemon> &pokemones) {
     return true;
 }
 
+// Funcion para mostrar los detalles completos del Pokemon
 void mostrarDetallesPokemon(const Pokemon &p) {
     cout << "Numero de Pokedex: " << p.id << " - " << p.nombre << endl;
     cout << "Tipo 1: " << p.tipo1 << (p.tipo2.empty() ? "" : " / Tipo 2: " + p.tipo2) << endl;
@@ -84,6 +88,7 @@ void mostrarDetallesPokemon(const Pokemon &p) {
     cout << "Velocidad: " << p.velocidad << " | Generación: " << p.generacion << endl;
 }
 
+// Funcion para mostrar info mediante el numero de Pokedex
 void buscarPorNum(const vector<Pokemon> &pokemones) {
     int num;
     cout << "Ingrese el número de Pokédex del Pokémon que desea buscar (1-150): ";
@@ -107,6 +112,7 @@ void buscarPorNum(const vector<Pokemon> &pokemones) {
     }
 }
 
+// Funcion para buscar info mediante el nombre del Pokemon
 void buscarPorNombre(const vector<Pokemon> &pokemones) {
     string nombreBuscado;
     cout << "Ingrese el nombre del Pokémon que desea buscar: ";
@@ -127,6 +133,7 @@ void buscarPorNombre(const vector<Pokemon> &pokemones) {
     }
 }
 
+// Funcion para ver los Pokemons por tipo
 void buscarPorTipo(const vector<Pokemon>& lista) {
     string tipo;
     cout << "Ingrese el tipo de Pokémon (ej. Grass, Fire, Water, Poison, etc.): ";
@@ -146,6 +153,7 @@ void buscarPorTipo(const vector<Pokemon>& lista) {
     cout << "Total encontrados: " << contador << endl;
 }   
 
+// Mostrar Pokemons mas fuertes y mas debiles
 void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     if (lista.empty()) return;
     
@@ -171,6 +179,7 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     }
 }
 
+// Funcion del menu
 void mostrarMenu() {
     cout << "\n========================================" << endl;
     cout << "             MENÚ POKÉDEX               " << endl;
