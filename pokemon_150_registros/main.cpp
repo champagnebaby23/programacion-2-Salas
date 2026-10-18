@@ -21,7 +21,7 @@ struct Pokemon {
 };
 
 bool cargarDatos(const string & nombreArchivo, vector<Pokemon> &pokemones) {
-    ifstream archivo(pokemon_150_registros.csv);
+    ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
         cout << "No se pudo abrir el archivo" << endl;
         return false;
@@ -52,7 +52,7 @@ bool cargarDatos(const string & nombreArchivo, vector<Pokemon> &pokemones) {
     getline(ss, temp, ',');
     getline(ss, temp, ',');
 
-    lista.Pokemon.push_back(p);
+    pokemones.push_back(p);
     };
 
     archivo.close();
@@ -129,3 +129,27 @@ void buscarPorTipo(const vector<Pokemon>& lista) {
     cout << "Total encontrados: " << contador << endl;
 }   
 
+void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
+    if (lista.empty()) return;
+    
+    vector<Pokemon> copia = lista;
+    
+    sort(copia.begin(), copia.end(), [](const Pokemon& a, const Pokemon& b) {
+        return a.total > b.total;
+    });
+    
+    cout << "\n========================================" << endl;
+    cout << "       TOP 3 POKEMON MAS FUERTES        " << endl;
+    cout << "========================================" << endl;
+    for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
+        cout << i + 1 << ". " << copia[i].nombre << " (Estadisticas totales: " << copia[i].total << ")" << endl;
+    }
+    
+    cout << "\n========================================" << endl;
+    cout << "       TOP 3 POKÉMON MÁS DÉBILES        " << endl;
+    cout << "========================================" << endl;
+    for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
+        size_t idx = copia.size() - 1 - i;
+        cout << i + 1 << ". " << copia[idx].nombre << " (Estadisticas totales: " << copia[idx].total << ")" << endl;
+    }
+}
