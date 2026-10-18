@@ -110,4 +110,17 @@ void buscarPorNombre (const vector<Pokemon> &pokemones, const string &nombre) {
         }
 }
 
+void buscarPorTipo (const vector<Pokemon> &pokemones, const string &tipo) {
+    string tipoBuscado;
+    cout << "Ingrese el tipo del pokemon que desea buscar: ";
+    cin >> tipoBuscado;
+    bool encontrado = false;
+    for (const auto &p : pokemones) {
+        if (p.tipo1 == tipoBuscado || p.tipo2 == tipoBuscado) {
+            mostrarDetallesPokemon(p);
+            encontrado = true;
+        } else {
+            cout << "No se encontro el pokemon" << endl;
+        }
+}
 
