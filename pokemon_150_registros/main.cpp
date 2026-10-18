@@ -3,6 +3,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iomanip>
+#include <algorithm>
+
 using namespace std;
 
 struct Pokemon {
@@ -10,81 +13,89 @@ struct Pokemon {
     string nombre;
     string tipo1;
     string tipo2;
-    short int total;
-    short int hp;
-    short int ataque;
-    short int ataqueEspecial;
-    short int defensaEspecial;
-    short int velocidad;
-    bool generacion;
-    bool legendario;
+    int total;
+    int hp;
+    int ataque;
+    int defensa;
+    int ataqueEsp;
+    int defensaEsp;
+    int velocidad;
+    int generacion;
+    string legendario;
 };
 
-bool cargarDatos(const string & nombreArchivo, vector<Pokemon> &pokemones) {
+string trim(const string& str) {
+    size_t first = str.find_first_not_of(" \t\r\n");
+    if (string::npos == first) return "";
+    size_t last = str.find_last_not_of(" \t\r\n");
+    return str.substr(first, (last - first + 1));
+}
+
+bool cargarDatos(const string &nombreArchivo, vector<Pokemon> &pokemones) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
-        cout << "No se pudo abrir el archivo" << endl;
+        cout << "No se pudo abrir el archivo: " << nombreArchivo << endl;
         return false;
-    };
+    }
 
     string linea;
     getline(archivo, linea);
 
-    while(getline(archivo, linea)) {
-        if(linea.empty()) {
+    while (getline(archivo, linea)) {
+        if (linea.empty()) {
             continue;
         }
-    stringstream ss(linea);
-    Pokemon p;
-    string temp;
+        
+        stringstream ss(linea);
+        Pokemon p;
+        string temp;
 
-    getline(ss, p.id, ',;');
-    getline(ss, p.nombre, ',;');
-    getline(ss, p.tipo1, ',');
-    getline(ss, p.tipo2, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
-    getline(ss, temp, ',');
+        try {
+            getline(ss, temp, ','); p.id = stoi(trim(temp));
+            getline(ss, p.nombre, ','); p.nombre = trim(p.nombre);
+            getline(ss, p.tipo1, ','); p.tipo1 = trim(p.tipo1);
+            getline(ss, p.tipo2, ','); p.tipo2 = trim(p.tipo2);
+            getline(ss, temp, ','); p.total = stoi(trim(temp));
+            getline(ss, temp, ','); p.hp = stoi(trim(temp));
+            getline(ss, temp, ','); p.ataque = stoi(trim(temp));
+            getline(ss, temp, ','); p.defensa = stoi(trim(temp));
+            getline(ss, temp, ','); p.ataqueEsp = stoi(trim(temp));
+            getline(ss, temp, ','); p.defensaEsp = stoi(trim(temp));
+            getline(ss, temp, ','); p.velocidad = stoi(trim(temp));
+            getline(ss, temp, ','); p.generacion = stoi(trim(temp));
+            getline(ss, p.legendario, ','); p.legendario = trim(p.legendario);
 
-    pokemones.push_back(p);
-    };
+            pokemones.push_back(p);
+        } catch (...) {
+            continue;
+        }
+    }
 
     archivo.close();
     return true;
 }
 
 void mostrarDetallesPokemon(const Pokemon &p) {
-    cout << "Numero de Pokedex:" << p.id << p.nombre << endl;
-    cout << "Tipo 1:" << p.tipo1 << endl;
-    cout << "Tipo 2: " << p.tipo2 << endl;
-    cout << "Total: " << p.total << endl;
-    cout << "HP: " << p.hp << endl;
-    cout << "Ataque: " << p.ataque << endl;
-    cout << "Ataque Especial: " << p.ataqueEspecial << endl;
-    cout << "Defensa Especial: " << p.defensaEspecial << endl;
-    cout << "Velocidad: " << p.velocidad << endl;
-    cout << "Generacion: " << p.generacion << endl;
+    cout << "Numero de Pokedex: " << p.id << " - " << p.nombre << endl;
+    cout << "Tipo 1: " << p.tipo1 << (p.tipo2.empty() ? "" : " / Tipo 2: " + p.tipo2) << endl;
+    cout << "Estadísticas totales: " << p.total << endl;
+    cout << "HP: " << p.hp << " | Ataque: " << p.ataque << " | Defensa: " << p.defensa << endl;
+    cout << "Ataque especial.: " << p.ataqueEsp << " | Defensa Esp.: " << p.defensaEsp << endl;
+    cout << "Velocidad: " << p.velocidad << " | Generación: " << p.generacion << endl;
     cout << "Legendario: " << p.legendario << endl;
-    if (p.legendario == true) {
-        cout << "Este pokemon es legendario" << endl;
-    } else {
-        cout << "Este pokemon no es legendario" << endl;
-    }
+    cout << "----------------------------------------" << endl;
 }
 
-void buscarPorNum (const vector<Pokemon> &pokemones, int num) {
-    short int num;
-    cout << "Ingrese el numero de Pokedex del pokemon que desea buscar: ";
+void buscarPorNum(const vector<Pokemon> &pokemones) {
+    int num;
+    cout << "Ingrese el número de Pokédex del Pokémon que desea buscar (1-150): ";
     cin >> num;
+    
     if (num < 1 || num > 150) {
-        cout << "El numero de Pokedex debe estar entre 1 y 150" << endl;
+        cout << "El número de Pokédex debe estar entre 1 y 150." << endl;
+        return;
     }
+    
     bool encontrado = false;
     for (const auto &p : pokemones) {
         if (p.id == num) {
@@ -93,21 +104,29 @@ void buscarPorNum (const vector<Pokemon> &pokemones, int num) {
             break;
         }
     }
+    if (!encontrado) {
+        cout << "No se encontró ningún Pokémon con el número " << num << "." << endl;
+    }
 }
 
-void buscarPorNombre (const vector<Pokemon> &pokemones, const string &nombre) {
+void buscarPorNombre(const vector<Pokemon> &pokemones) {
     string nombreBuscado;
-    cout << "Ingrese el nombre del pokemon que desea buscar: ";
-    cin >> nombreBuscado;
+    cout << "Ingrese el nombre del Pokémon que desea buscar: ";
+    cin >> ws; // Limpiar buffer
+    getline(cin, nombreBuscado);
+    
     bool encontrado = false;
     for (const auto &p : pokemones) {
         if (p.nombre == nombreBuscado) {
             mostrarDetallesPokemon(p);
             encontrado = true;
             break;
-        } else {
-            cout << "No se encontro el pokemon" << endl;
         }
+    }
+    
+    if (!encontrado) {
+        cout << "No se encontró el Pokémon \"" << nombreBuscado << "\"." << endl;
+    }
 }
 
 void buscarPorTipo(const vector<Pokemon>& lista) {
@@ -120,7 +139,7 @@ void buscarPorTipo(const vector<Pokemon>& lista) {
     int contador = 0;
     for (const auto& p : lista) {
         if (p.tipo1 == tipo || p.tipo2 == tipo) {
-            cout << left << setw(5) << p.numeroPokedex << " - " 
+            cout << left << setw(5) << p.id << " - " 
                  << setw(15) << p.nombre 
                  << " (Total Stats: " << p.total << ")" << endl;
             contador++;
@@ -139,10 +158,10 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     });
     
     cout << "\n========================================" << endl;
-    cout << "       TOP 3 POKEMON MAS FUERTES        " << endl;
+    cout << "       TOP 3 POKÉMON MÁS FUERTES        " << endl;
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
-        cout << i + 1 << ". " << copia[i].nombre << " (Estadisticas totales: " << copia[i].total << ")" << endl;
+        cout << i + 1 << ". " << copia[i].nombre << " (Estadísticas totales: " << copia[i].total << ")" << endl;
     }
     
     cout << "\n========================================" << endl;
@@ -150,6 +169,63 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
         size_t idx = copia.size() - 1 - i;
-        cout << i + 1 << ". " << copia[idx].nombre << " (Estadisticas totales: " << copia[idx].total << ")" << endl;
+        cout << i + 1 << ". " << copia[idx].nombre << " (Estadísticas totales: " << copia[idx].total << ")" << endl;
     }
+}
+
+void mostrarMenu() {
+    cout << "\n========================================" << endl;
+    cout << "             MENÚ POKÉDEX               " << endl;
+    cout << "========================================" << endl;
+    cout << "1. Ver info de Pokémon por número de Pokédex" << endl;
+    cout << "2. Buscar Pokémon por nombre" << endl;
+    cout << "3. Ver Pokémon por tipo" << endl;
+    cout << "4. Ver info detallada por nombre" << endl;
+    cout << "5. Ver Top 3 más fuertes y Top 3 más débiles" << endl;
+    cout << "6. Salir" << endl;
+    cout << "Seleccione una opción: ";
+}
+
+int main() {
+    setlocale(LC_ALL, "spanish");
+    string archivoCSV = "pokemon_150_registros.csv";
+    vector<Pokemon> lista; 
+    
+    if (!cargarDatos(archivoCSV, lista)) {
+        return 1;
+    } else {
+        cout << "¡Se cargaron " << lista.size() << " registros exitosamente!" << endl;
+    }
+
+    int opcion;
+    do {
+        mostrarMenu();
+        cin >> opcion;
+
+        switch(opcion) {
+            case 1:
+                buscarPorNum(lista);
+                break;
+            case 2:
+                buscarPorNombre(lista);
+                break;
+            case 3:
+                buscarPorTipo(lista);
+                break;
+            case 4:
+                buscarPorNombre(lista);
+                break;
+            case 5:
+                mostrarTopEstadisticas(lista);
+                break;
+            case 6:
+                cout << "Saliendo del programa..." << endl;
+                break;
+            default:
+                cout << "Opción inválida, intente nuevamente." << endl;
+                break;
+        }
+    } while (opcion != 6);
+
+    return 0;
 }
