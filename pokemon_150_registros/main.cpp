@@ -78,4 +78,12 @@ void mostrarDetallesPokemon(const Pokemon &p) {
     }
 };
 
-
+void buscarPorNum (const vector<Pokemon> &pokemones, int num) {
+    for (const auto &p : pokemones) {
+        if (p.id == num) {
+            mostrarDetallesPokemon(p);
+            return;
+        }
+    }
+    cout << "No se encontro un pokemon" << endl;
+};
