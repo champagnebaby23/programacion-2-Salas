@@ -110,18 +110,22 @@ void buscarPorNombre (const vector<Pokemon> &pokemones, const string &nombre) {
         }
 }
 
-void buscarPokemonesPorTipo (const vector<Pokemon> &pokemones, const string &tipo) {
-    string tipoBuscado;
-    cout << "Ingrese el tipo del pokemon que desea buscar: ";
-    cin >> tipoBuscado;
-    bool encontrado = false;
-    for (const auto &p : pokemones) {
-        if (p.tipo1 == tipoBuscado || p.tipo2 == tipoBuscado) {
-            mostrarDetallesPokemon(p);
-            encontrado = true;
-        } else {
-            cout << "No se encontro el pokemon" << endl;
+void buscarPorTipo(const vector<Pokemon>& lista) {
+    string tipo;
+    cout << "Ingrese el tipo de Pokémon (ej. Grass, Fire, Water, Poison, etc.): ";
+    cin >> ws;
+    getline(cin, tipo);
+    
+    cout << "\n--- POKÉMONS DE TIPO: " << tipo << " ---" << endl;
+    int contador = 0;
+    for (const auto& p : lista) {
+        if (p.tipo1 == tipo || p.tipo2 == tipo) {
+            cout << left << setw(5) << p.numeroPokedex << " - " 
+                 << setw(15) << p.nombre 
+                 << " (Total Stats: " << p.total << ")" << endl;
+            contador++;
         }
-}
-
+    }
+    cout << "Total encontrados: " << contador << endl;
+}   
 
