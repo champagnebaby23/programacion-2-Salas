@@ -20,4 +20,10 @@ struct Pokemon {
     bool legendario;
 };
 
+bool cargarDatos(const string & nombreArchivo, vector<Pokemon> &pokemones) {
+    ifstream archivo(pokemon_150_registros.csv);
+    if (!archivo.is_open()) {
+        cout << "No se pudo abrir el archivo" << endl;
+        return false;
+    }
 
