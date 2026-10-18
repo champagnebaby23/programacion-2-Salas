@@ -59,4 +59,23 @@ bool cargarDatos(const string & nombreArchivo, vector<Pokemon> &pokemones) {
     return true;
 }
 
+void mostrarDetallesPokemon(const Pokemon &p) {
+    cout << "Numero de Pokedex:" << p.id << p.nombre << endl;
+    cout << "Tipo 1:" << p.tipo1 << endl;
+    cout << "Tipo 2: " << p.tipo2 << endl;
+    cout << "Total: " << p.total << endl;
+    cout << "HP: " << p.hp << endl;
+    cout << "Ataque: " << p.ataque << endl;
+    cout << "Ataque Especial: " << p.ataqueEspecial << endl;
+    cout << "Defensa Especial: " << p.defensaEspecial << endl;
+    cout << "Velocidad: " << p.velocidad << endl;
+    cout << "Generacion: " << p.generacion << endl;
+    cout << "Legendario: " << p.legendario << endl;
+    if (p.legendario == true) {
+        cout << "Este pokemon es legendario" << endl;
+    } else {
+        cout << "Este pokemon no es legendario" << endl;
+    }
+};
+
 
