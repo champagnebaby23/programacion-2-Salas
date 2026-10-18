@@ -110,7 +110,7 @@ void buscarPorNombre (const vector<Pokemon> &pokemones, const string &nombre) {
         }
 }
 
-void buscarPorTipo (const vector<Pokemon> &pokemones, const string &tipo) {
+void buscarPokemonesPorTipo (const vector<Pokemon> &pokemones, const string &tipo) {
     string tipoBuscado;
     cout << "Ingrese el tipo del pokemon que desea buscar: ";
     cin >> tipoBuscado;
@@ -123,4 +123,5 @@ void buscarPorTipo (const vector<Pokemon> &pokemones, const string &tipo) {
             cout << "No se encontro el pokemon" << endl;
         }
 }
+
 
