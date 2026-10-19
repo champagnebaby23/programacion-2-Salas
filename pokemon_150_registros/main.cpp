@@ -108,11 +108,8 @@ void buscarPorNum(const vector<Pokemon> &pokemones) {
         }
     }
     if (!encontrado) {
-<<<<<<< HEAD
         cout << "No se encontró ningún Pokemon con el número " << num << "." << endl;
-=======
         cout << "No se encontro ningun Pokemon con el numero " << num << "." << endl;
->>>>>>> 6637f55 (Arreglados errores de codificacion)
     }
 }
 
@@ -133,11 +130,8 @@ void buscarPorNombre(const vector<Pokemon> &pokemones) {
     }
     
     if (!encontrado) {
-<<<<<<< HEAD
         cout << "No se encontró el Pokemon \"" << nombreBuscado << "\"." << endl;
-=======
         cout << "No se encontro el Pokemon \"" << nombreBuscado << "\"." << endl;
->>>>>>> 6637f55 (Arreglados errores de codificacion)
     }
 }
 
@@ -192,11 +186,8 @@ void mostrarMenu() {
     cout << "\n========================================" << endl;
     cout << "             MENU POKEDEX               " << endl;
     cout << "========================================" << endl;
-<<<<<<< HEAD
     cout << "1. Ver info de Pokemon por número de Pokedex" << endl;
-=======
     cout << "1. Ver info de Pokemon por numero de Pokedex" << endl;
->>>>>>> 6637f55 (Arreglados errores de codificacion)
     cout << "2. Buscar Pokemon por nombre" << endl;
     cout << "3. Ver Pokemon por tipo" << endl;
     cout << "4. Ver info detallada por nombre" << endl;
