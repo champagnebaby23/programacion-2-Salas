@@ -108,14 +108,14 @@ void buscarPorNum(const vector<Pokemon> &pokemones) {
         }
     }
     if (!encontrado) {
-        cout << "No se encontró ningún Pokémon con el número " << num << "." << endl;
+        cout << "No se encontró ningún Pokemon con el número " << num << "." << endl;
     }
 }
 
 // Funcion para buscar info mediante el nombre del Pokemon
 void buscarPorNombre(const vector<Pokemon> &pokemones) {
     string nombreBuscado;
-    cout << "Ingrese el nombre del Pokémon que desea buscar: ";
+    cout << "Ingrese el nombre del Pokemon que desea buscar: ";
     cin >> ws; // Limpiar buffer
     getline(cin, nombreBuscado);
     
@@ -129,18 +129,18 @@ void buscarPorNombre(const vector<Pokemon> &pokemones) {
     }
     
     if (!encontrado) {
-        cout << "No se encontró el Pokémon \"" << nombreBuscado << "\"." << endl;
+        cout << "No se encontró el Pokemon \"" << nombreBuscado << "\"." << endl;
     }
 }
 
 // Funcion para ver los Pokemons por tipo
 void buscarPorTipo(const vector<Pokemon>& lista) {
     string tipo;
-    cout << "Ingrese el tipo de Pokémon (ej. Grass, Fire, Water, Poison, etc.): ";
+    cout << "Ingrese el tipo de Pokemon (ej. Grass, Fire, Water, Poison, etc.): ";
     cin >> ws;
     getline(cin, tipo);
     
-    cout << "\n--- POKÉMONS DE TIPO: " << tipo << " ---" << endl;
+    cout << "\n--- POKEMONS DE TIPO: " << tipo << " ---" << endl;
     int contador = 0;
     for (const auto& p : lista) {
         if (p.tipo1 == tipo || p.tipo2 == tipo) {
@@ -164,14 +164,14 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     });
     
     cout << "\n========================================" << endl;
-    cout << "       TOP 3 POKÉMON MÁS FUERTES        " << endl;
+    cout << "       TOP 3 POKEMON MAS FUERTES        " << endl;
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
         cout << i + 1 << ". " << copia[i].nombre << " (Estadísticas totales: " << copia[i].total << ")" << endl;
     }
     
     cout << "\n========================================" << endl;
-    cout << "       TOP 3 POKÉMON MÁS DÉBILES        " << endl;
+    cout << "       TOP 3 POKEMON MAS DEBILES        " << endl;
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
         size_t idx = copia.size() - 1 - i;
@@ -182,15 +182,15 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
 // Funcion del menu
 void mostrarMenu() {
     cout << "\n========================================" << endl;
-    cout << "             MENÚ POKÉDEX               " << endl;
+    cout << "             MENU POKEDEX               " << endl;
     cout << "========================================" << endl;
-    cout << "1. Ver info de Pokémon por número de Pokédex" << endl;
-    cout << "2. Buscar Pokémon por nombre" << endl;
-    cout << "3. Ver Pokémon por tipo" << endl;
+    cout << "1. Ver info de Pokemon por número de Pokedex" << endl;
+    cout << "2. Buscar Pokemon por nombre" << endl;
+    cout << "3. Ver Pokemon por tipo" << endl;
     cout << "4. Ver info detallada por nombre" << endl;
-    cout << "5. Ver Top 3 más fuertes y Top 3 más débiles" << endl;
+    cout << "5. Ver Top 3 mas fuertes y Top 3 mas debiles" << endl;
     cout << "6. Salir" << endl;
-    cout << "Seleccione una opción: ";
+    cout << "Seleccione una opcion: ";
 }
 
 int main() {
@@ -229,7 +229,7 @@ int main() {
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción inválida, intente nuevamente." << endl;
+                cout << "Opción invalida, intente nuevamente." << endl;
                 break;
         }
     } while (opcion != 6);
