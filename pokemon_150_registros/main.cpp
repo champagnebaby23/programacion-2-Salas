@@ -82,20 +82,20 @@ bool cargarDatos(const string &nombreArchivo, vector<Pokemon> &pokemones) {
 void mostrarDetallesPokemon(const Pokemon &p) {
     cout << "Numero de Pokedex: " << p.id << " - " << p.nombre << endl;
     cout << "Tipo 1: " << p.tipo1 << (p.tipo2.empty() ? "" : " / Tipo 2: " + p.tipo2) << endl;
-    cout << "Estadísticas totales: " << p.total << endl;
+    cout << "Estadisticas totales: " << p.total << endl;
     cout << "HP: " << p.hp << " | Ataque: " << p.ataque << " | Defensa: " << p.defensa << endl;
     cout << "Ataque especial.: " << p.ataqueEsp << " | Defensa Esp.: " << p.defensaEsp << endl;
-    cout << "Velocidad: " << p.velocidad << " | Generación: " << p.generacion << endl;
+    cout << "Velocidad: " << p.velocidad << " | Generacion: " << p.generacion << endl;
 }
 
 // Funcion para mostrar info mediante el numero de Pokedex
 void buscarPorNum(const vector<Pokemon> &pokemones) {
     int num;
-    cout << "Ingrese el número de Pokédex del Pokémon que desea buscar (1-150): ";
+    cout << "Ingrese el numero de Pokedex del Pokemon que desea buscar (1-150): ";
     cin >> num;
     
     if (num < 1 || num > 150) {
-        cout << "El número de Pokédex debe estar entre 1 y 150." << endl;
+        cout << "El numero de Pokedex debe estar entre 1 y 150." << endl;
         return;
     }
     
@@ -108,7 +108,11 @@ void buscarPorNum(const vector<Pokemon> &pokemones) {
         }
     }
     if (!encontrado) {
+<<<<<<< HEAD
         cout << "No se encontró ningún Pokemon con el número " << num << "." << endl;
+=======
+        cout << "No se encontro ningun Pokemon con el numero " << num << "." << endl;
+>>>>>>> 6637f55 (Arreglados errores de codificacion)
     }
 }
 
@@ -129,7 +133,11 @@ void buscarPorNombre(const vector<Pokemon> &pokemones) {
     }
     
     if (!encontrado) {
+<<<<<<< HEAD
         cout << "No se encontró el Pokemon \"" << nombreBuscado << "\"." << endl;
+=======
+        cout << "No se encontro el Pokemon \"" << nombreBuscado << "\"." << endl;
+>>>>>>> 6637f55 (Arreglados errores de codificacion)
     }
 }
 
@@ -167,7 +175,7 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     cout << "       TOP 3 POKEMON MAS FUERTES        " << endl;
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
-        cout << i + 1 << ". " << copia[i].nombre << " (Estadísticas totales: " << copia[i].total << ")" << endl;
+        cout << i + 1 << ". " << copia[i].nombre << " (Estadisticas totales: " << copia[i].total << ")" << endl;
     }
     
     cout << "\n========================================" << endl;
@@ -175,7 +183,7 @@ void mostrarTopEstadisticas(const vector<Pokemon>& lista) {
     cout << "========================================" << endl;
     for (size_t i = 0; i < 3 && i < copia.size(); ++i) {
         size_t idx = copia.size() - 1 - i;
-        cout << i + 1 << ". " << copia[idx].nombre << " (Estadísticas totales: " << copia[idx].total << ")" << endl;
+        cout << i + 1 << ". " << copia[idx].nombre << " (Estadisticas totales: " << copia[idx].total << ")" << endl;
     }
 }
 
@@ -184,7 +192,11 @@ void mostrarMenu() {
     cout << "\n========================================" << endl;
     cout << "             MENU POKEDEX               " << endl;
     cout << "========================================" << endl;
+<<<<<<< HEAD
     cout << "1. Ver info de Pokemon por número de Pokedex" << endl;
+=======
+    cout << "1. Ver info de Pokemon por numero de Pokedex" << endl;
+>>>>>>> 6637f55 (Arreglados errores de codificacion)
     cout << "2. Buscar Pokemon por nombre" << endl;
     cout << "3. Ver Pokemon por tipo" << endl;
     cout << "4. Ver info detallada por nombre" << endl;
@@ -194,7 +206,6 @@ void mostrarMenu() {
 }
 
 int main() {
-    setlocale(LC_ALL, "spanish");
     string archivoCSV = "pokemon_150_registros.csv";
     vector<Pokemon> lista; 
     
