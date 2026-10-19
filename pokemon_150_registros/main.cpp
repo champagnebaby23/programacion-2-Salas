@@ -108,7 +108,6 @@ void buscarPorNum(const vector<Pokemon> &pokemones) {
         }
     }
     if (!encontrado) {
-        cout << "No se encontró ningún Pokemon con el número " << num << "." << endl;
         cout << "No se encontro ningun Pokemon con el numero " << num << "." << endl;
     }
 }
@@ -130,7 +129,6 @@ void buscarPorNombre(const vector<Pokemon> &pokemones) {
     }
     
     if (!encontrado) {
-        cout << "No se encontró el Pokemon \"" << nombreBuscado << "\"." << endl;
         cout << "No se encontro el Pokemon \"" << nombreBuscado << "\"." << endl;
     }
 }
@@ -186,7 +184,6 @@ void mostrarMenu() {
     cout << "\n========================================" << endl;
     cout << "             MENU POKEDEX               " << endl;
     cout << "========================================" << endl;
-    cout << "1. Ver info de Pokemon por número de Pokedex" << endl;
     cout << "1. Ver info de Pokemon por numero de Pokedex" << endl;
     cout << "2. Buscar Pokemon por nombre" << endl;
     cout << "3. Ver Pokemon por tipo" << endl;
@@ -231,7 +228,7 @@ int main() {
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción invalida, intente nuevamente." << endl;
+                cout << "Opcion invalida, intente nuevamente." << endl;
                 break;
         }
     } while (opcion != 6);
